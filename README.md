@@ -75,7 +75,7 @@ Compose runs PostgreSQL 16, applies Alembic migrations on start, and keeps model
 ## Dataset (GTZAN)
 
 By default the project uses the public **GTZAN** collection via Hugging Face
-(`mtg-upf/gtzan-genre-recognition`, 10 genres, 100 × 30s tracks).
+(`marsyas/gtzan`, 10 genres, 100 × 30s tracks, ~1.1 GB tarball).
 
 ```bash
 python scripts/prepare_dataset.py --download   # downloads & builds manifest + splits (needs ~1-2 GB)
