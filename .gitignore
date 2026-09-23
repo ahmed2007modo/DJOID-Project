@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+dist/
+build/
+mlruns/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Data / artifacts
+data/media/
+data/models/
+data/datasets/
+data/musiq_*.db
+*.db
+
+# Local env
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

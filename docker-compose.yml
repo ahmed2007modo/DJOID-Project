@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: musiq
+      POSTGRES_PASSWORD: musiq
+      POSTGRES_DB: musiq
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U musiq"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      MUSIQ_DATABASE_URL: postgresql+psycopg2://musiq:musiq@db:5432/musiq
+      MUSIQ_EMBEDDING_BACKEND: mock
+      MUSIQ_AUTO_TRAIN_ON_START: "false"
+    volumes:
+      - musiqdata:/data
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+
+volumes:
+  pgdata:
+  musiqdata:
